@@ -1,0 +1,56 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "6c6731904c16e84e6dda54ee876ec428",
+    "packages": [
+        {
+            "name": "laswitchtech/core-configurator",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/LaswitchTech/coreConfigurator.git",
+                "reference": "27b3f9d7c6c157834256e423d3f7a2d1d01da68a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/LaswitchTech/coreConfigurator/zipball/27b3f9d7c6c157834256e423d3f7a2d1d01da68a",
+                "reference": "27b3f9d7c6c157834256e423d3f7a2d1d01da68a",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "LaswitchTech\\coreConfigurator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Louis Ouellet",
+                    "email": "louis_ouellet@hotmail.com"
+                }
+            ],
+            "description": "Configurator Library for the Laswitch Core Framework",
+            "support": {
+                "issues": "https://github.com/LaswitchTech/coreConfigurator/issues",
+                "source": "https://github.com/LaswitchTech/coreConfigurator/tree/v1.0.0"
+            },
+            "time": "2024-06-11T17:02:16+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.6.0"
+}
