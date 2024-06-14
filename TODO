@@ -15,9 +15,10 @@
     - [X] Create directory `example`
     - [X] Initialize Composer `composer init`
     - [X] Dump autoload `composer dump-autoload`
-    - [ ] Perform initial push to GitHub
-    - [ ] Create `stable` branch from `dev` branch on GitHub
-    - [ ] Create a package on Packagist
+    - [X] Perform initial push to GitHub
+    - [X] Create `stable` branch from `dev` branch on GitHub
+    - [X] Set `stable` branch as default branch on GitHub
+    - [X] Create a package on Packagist
     - [ ] Create a release on GitHub
 - [X] Create the core class
     - [X] Create the `Core` class
@@ -29,10 +30,10 @@
     - [X] Create the `Core` class annotations
 - [X] Create the `isInstalled` method in the `Core` class (optional)
 - [ ] Integrations
-    - [ ] Integration with coreLogger
+    - [X] Integration with coreLogger
     - [ ] Integration with coreInstaller (isInstalled method)
-    - [ ] Integration with coreCLI
-    - [ ] Integration with coreAPI
+    - [X] Integration with coreCLI
+    - [X] Integration with coreAPI
     - [ ] Integration with coreRouter
 - [ ] Documentations
     - [X] Create the `docs/usage.md` file

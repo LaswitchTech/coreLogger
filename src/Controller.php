@@ -35,366 +35,256 @@ class Controller extends BaseController {
 		parent::__construct($Auth);
 	}
 
-    // /**
-    //  * Set a configuration using coreAPI
-    //  *
-    //  * @param string $file
-    //  * @param string $configuration
-    //  * @param string|array $value
-    //  * @return void
-    //  */
-    // public function setAction(){
-
-    //     // Namespace: /configurator/set $file $configuration $value
-
-    //     // Debug information
-    //     $this->Logger->debug('Namespace: /configurator/set $file $configuration $value');
-    //     $this->Logger->debug('Extending: coreAPI');
-
-    //     // Check for required parameters
-    //     $file = $this->getParams('REQUEST', 'file');
-    //     $configuration = $this->getParams('REQUEST', 'configuration');
-    //     $value = $this->getParams('REQUEST', 'value');
-
-    //     // Debug information
-    //     $this->Logger->debug('$file: ' . json_encode($file, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-    //     $this->Logger->debug('$configuration: ' . json_encode($configuration, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-    //     $this->Logger->debug('$value: ' . json_encode($value, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-
-    //     // Validate parameters
-    //     if(empty($file) || empty($configuration) || empty($value)){
-
-    //         // Log error and debug information
-    //         $this->Logger->error('Missing required parameters');
-
-    //         // Send the output
-    //         $this->output(
-    //             ['error' => 'Missing required parameters'],
-    //             array('Content-Type: application/json', 'HTTP/1.1 500 Internal Server Error')
-    //         );
-
-    //         return;
-    //     }
-
-    //     // Validate CSRF token
-    //     if(!$this->CSRF->validate()){
-
-    //         // Log error and debug information
-    //         $this->Logger->error('Invalid CSRF token');
-    //         $this->Logger->debug('$token: ' . json_encode($this->CSRF->token(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-
-    //         // Send the output
-    //         $this->output(
-    //             ['error' => 'Invalid CSRF token'],
-    //             array('Content-Type: application/json', 'HTTP/1.1 500 Internal Server Error')
-    //         );
-
-    //         return;
-    //     }
-
-    //     // Set a configuration
-    //     if($this->Configurator->set($file, $configuration, $value)){
-
-    //         // Send the output
-    //         $this->output(
-    //             'Configuration ' . $file . '/' . $configuration . ' set to ' . $value,
-    //             array('Content-Type: application/json', 'HTTP/1.1 200 OK')
-    //         );
-    //     } else {
-
-    //         // Log error and debug information
-    //         $this->Logger->error('Unable to set configuration ' . $file . '/' . $configuration . ' to ' . $value);
-
-    //         // Send the output
-    //         $this->output(
-    //             ['error' => 'Unable to set configuration ' . $file . '/' . $configuration . ' to ' . $value],
-    //             array('Content-Type: application/json', 'HTTP/1.1 500 Internal Server Error')
-    //         );
-    //     }
-    // }
-
-    // /**
-    //  * Set a configuration using coreRouter
-    //  *
-    //  * @param string $file
-    //  * @param string $configuration
-    //  * @param string|array $value
-    //  * @return void
-    //  */
-    // public function setRouterAction(){
-
-    //     // Namespace: /configurator/set $file $configuration $value
-
-    //     // Debug information
-    //     $this->Logger->debug('Namespace: /configurator/set $file $configuration $value');
-    //     $this->Logger->debug('Extending: coreRouter');
-
-    //     // Check for required parameters
-    //     $file = isset($_GET['file']) ? $_GET['file'] : null;
-    //     $configuration = isset($_GET['configuration']) ? $_GET['configuration'] : null;
-    //     $value = isset($_POST['value']) ? $_POST['value'] : null;
-
-    //     // Debug information
-    //     $this->Logger->debug('$file: ' . json_encode($file, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-    //     $this->Logger->debug('$configuration: ' . json_encode($configuration, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-    //     $this->Logger->debug('$value: ' . json_encode($value, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-
-    //     // Validate parameters
-    //     if(empty($file) || empty($configuration) || empty($value)){
-
-    //         // Log error and debug information
-    //         $this->Logger->error('Missing required parameters');
-
-    //         // Return
-    //         return ['error' => 'Missing required parameters'];
-    //     }
-
-    //     // Validate CSRF token
-    //     if(!$this->CSRF->validate()){
-
-    //         // Log error and debug information
-    //         $this->Logger->error('Invalid CSRF token');
-    //         $this->Logger->debug('$token: ' . json_encode($this->CSRF->token(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-
-    //         // Return
-    //         return ['error' => 'Invalid CSRF token'];
-    //     }
+    /**
+     * Get a list of logs using coreAPI
+     *
+     * @return void
+     */
+    public function listAction(){
+
+        // Namespace: /logger/list
+
+        // Debug information
+        $this->Logger->debug('Namespace: /logger/list');
+        $this->Logger->debug('Extending: coreAPI');
+
+        // Get list of logs
+        $logs = $this->Logger->list();
+
+        // Send the output
+        $this->output(
+            $logs,
+            array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+        );
+    }
+
+    /**
+     * Get a list of logs using coreRouter
+     *
+     * @return void
+     */
+    public function listRouterAction(){
+
+        // Namespace: /logger/list
+
+        // Debug information
+        $this->Logger->debug('Namespace: /logger/list');
+        $this->Logger->debug('Extending: coreRouter');
+
+        // Get list of logs
+        $logs = $this->Logger->list();
+
+        // Return
+        return $logs;
+    }
+
+    /**
+     * Read a log using coreAPI
+     *
+     * @param string $log
+     * @return void
+     */
+    public function readAction(){
+
+        // Namespace: /logger/read $log
 
-    //     // Set a configuration
-    //     if($this->Configurator->set($file, $configuration, $value)){
-
-    //         // Return
-    //         return 'Configuration ' . $file . '/' . $configuration . ' set to ' . $value;
-    //     } else {
-
-    //         // Log error and debug information
-    //         $this->Logger->error('Unable to set configuration ' . $file . '/' . $configuration . ' to ' . $value);
-
-    //         // Return
-    //         return ['error' => 'Unable to set configuration ' . $file . '/' . $configuration . ' to ' . $value];
-    //     }
-    // }
-
-    // /**
-    //  * Get a configuration using coreAPI
-    //  *
-    //  * @param string $file
-    //  * @param string $configuration
-    //  * @return void
-    //  */
-    // public function getAction(){
+        // Debug information
+        $this->Logger->debug('Namespace: /logger/read $log');
+        $this->Logger->debug('Extending: coreAPI');
+
+        // Check for required parameter
+        $log = $this->getParams('REQUEST', 'log');
+
+        // Debug information
+        $this->Logger->debug('$log: ' . json_encode($log, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+
+        // Validate parameter
+        if(empty($log)){
+
+            // Log error and debug information
+            $this->Logger->error('Missing required parameter');
 
-    //     // Namespace: /configurator/get $file $configuration
+            // Send the output
+            $this->output(
+                ['error' => 'Missing required parameter'],
+                array('Content-Type: application/json', 'HTTP/1.1 500 Internal Server Error')
+            );
+
+            return;
+        }
+
+        // Read a log
+        $content = $this->Logger->read($log);
 
-    //     // Debug information
-    //     $this->Logger->debug('Namespace: /configurator/get $file $configuration');
-    //     $this->Logger->debug('Extending: coreAPI');
-
-    //     // Check for required parameters
-    //     $file = $this->getParams('REQUEST', 'file');
-    //     $configuration = $this->getParams('REQUEST', 'configuration');
-
-    //     // Debug information
-    //     $this->Logger->debug('$file: ' . json_encode($file, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-    //     $this->Logger->debug('$configuration: ' . json_encode($configuration, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-
-    //     // Validate parameters
-    //     if(empty($file) || empty($configuration)){
-
-    //         // Log error and debug information
-    //         $this->Logger->error('Missing required parameters');
-
-    //         // Send the output
-    //         $this->output(
-    //             ['error' => 'Missing required parameters'],
-    //             array('Content-Type: application/json', 'HTTP/1.1 500 Internal Server Error')
-    //         );
-
-    //         return;
-    //     }
-
-    //     // Get a configuration
-    //     $value = $this->Configurator->get($file, $configuration);
+        // Send the output
+        $this->output(
+            $content,
+            array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+        );
+    }
+
+    /**
+     * Read a log using coreRouter
+     *
+     * @param string $log
+     * @return void
+     */
+    public function readRouterAction(){
+
+        // Namespace: /logger/read $log
+
+        // Debug information
+        $this->Logger->debug('Namespace: /logger/read $log');
+        $this->Logger->debug('Extending: coreRouter');
+
+        // Check for required parameter
+        $log = isset($_GET['log']) ? $_GET['log'] : null;
+
+        // Debug information
+        $this->Logger->debug('$log: ' . json_encode($log, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 
-    //     // Send the output
-    //     $this->output(
-    //         $value,
-    //         array('Content-Type: application/json', 'HTTP/1.1 200 OK')
-    //     );
-    // }
-
-    // /**
-    //  * Get a configuration using coreRouter
-    //  *
-    //  * @param string $file
-    //  * @param string $configuration
-    //  * @return void
-    //  */
-    // public function getRouterAction(){
+        // Validate parameter
+        if(empty($log)){
+
+            // Log error and debug information
+            $this->Logger->error('Missing required parameter');
+
+            // Return
+            return ['error' => 'Missing required parameter'];
+        }
 
-    //     // Namespace: /configurator/get $file $configuration
-
-    //     // Debug information
-    //     $this->Logger->debug('Namespace: /configurator/get $file $configuration');
-    //     $this->Logger->debug('Extending: coreRouter');
+        // Read a log
+        $content = $this->Logger->read($log);
 
-    //     // Check for required parameters
-    //     $file = isset($_GET['file']) ? $_GET['file'] : null;
-    //     $configuration = isset($_GET['configuration']) ? $_GET['configuration'] : null;
+        // Return
+        return $content;
+    }
 
-    //     // Debug information
-    //     $this->Logger->debug('$file: ' . json_encode($file, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-    //     $this->Logger->debug('$configuration: ' . json_encode($configuration, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+    /**
+     * Clear a log using coreAPI
+     *
+     * @param string $log
+     * @return void
+     */
+    public function clearAction(){
 
-    //     // Validate parameters
-    //     if(empty($file) || empty($configuration)){
-
-    //         // Log error and debug information
-    //         $this->Logger->error('Missing required parameters');
+        // Namespace: /logger/clear $log
 
-    //         // Return
-    //         return ['error' => 'Missing required parameters'];
-    //     }
+        // Debug information
+        $this->Logger->debug('Namespace: /logger/clear $log');
+        $this->Logger->debug('Extending: coreAPI');
 
-    //     // Get a configuration
-    //     $value = $this->Configurator->get($file, $configuration);
+        // Check for required parameter
+        $log = $this->getParams('REQUEST', 'log');
 
-    //     // Return
-    //     return $value;
-    // }
+        // Debug information
+        $this->Logger->debug('$log: ' . json_encode($log, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 
-    // /**
-    //  * Get a list of configurations using coreAPI
-    //  *
-    //  * @return void
-    //  */
-    // public function listAction(){
-
-    //     // Namespace: /configurator/list $all = false
+        // Validate parameter
+        if(empty($log)){
 
-    //     // Debug information
-    //     $this->Logger->debug('Namespace: /configurator/list $all = false');
-    //     $this->Logger->debug('Extending: coreAPI');
+            // Log error and debug information
+            $this->Logger->error('Missing required parameter');
 
-    //     // Check for optional parameter
-    //     $all = isset($_GET['all']) ? boolval($_GET['all']) : false;
+            // Send the output
+            $this->output(
+                ['error' => 'Missing required parameter'],
+                array('Content-Type: application/json', 'HTTP/1.1 500 Internal Server Error')
+            );
 
-    //     // Debug information
-    //     $this->Logger->debug('$all: ' . json_encode($all, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+            return;
+        }
 
-    //     // Get list of loaded configuration files
-    //     $files = $this->Configurator->list($all);
+        // Validate CSRF token
+        if(!$this->CSRF->validate()){
 
-    //     // Send the output
-    //     $this->output(
-    //         $files,
-    //         array('Content-Type: application/json', 'HTTP/1.1 200 OK')
-    //     );
-    // }
+            // Log error and debug information
+            $this->Logger->error('Invalid CSRF token');
+            $this->Logger->debug('$token: ' . json_encode($this->CSRF->token(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 
-    // /**
-    //  * Get a list of configurations using coreRouter
-    //  *
-    //  * @return void
-    //  */
-    // public function listRouterAction(){
+            // Send the output
+            $this->output(
+                ['error' => 'Invalid CSRF token'],
+                array('Content-Type: application/json', 'HTTP/1.1 500 Internal Server Error')
+            );
 
-    //     // Namespace: /configurator/list $all = false
+            return;
+        }
 
-    //     // Debug information
-    //     $this->Logger->debug('Namespace: /configurator/list $all = false');
-    //     $this->Logger->debug('Extending: coreRouter');
+        // Clear a log
+        if($this->Logger->clear($log)){
 
-    //     // Check for optional parameter
-    //     $all = isset($_GET['all']) ? boolval($_GET['all']) : false;
+            // Send the output
+            $this->output(
+                'Log ' . $log . ' cleared',
+                array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+            );
+        } else {
 
-    //     // Debug information
-    //     $this->Logger->debug('$all: ' . json_encode($all, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+            // Log error and debug information
+            $this->Logger->error('Unable to clear log ' . $log);
 
-    //     // Get list of loaded configuration files
-    //     $files = $this->Configurator->list($all);
+            // Send the output
+            $this->output(
+                ['error' => 'Unable to clear log ' . $log],
+                array('Content-Type: application/json', 'HTTP/1.1 500 Internal Server Error')
+            );
+        }
+    }
 
-    //     // Return
-    //     return $files;
-    // }
+    /**
+     * Clear a log using coreRouter
+     *
+     * @param string $log
+     * @return void
+     */
+    public function clearRouterAction(){
 
-    // /**
-    //  * Get a list of configuration's parameters using coreAPI
-    //  *
-    //  * @return void
-    //  */
-    // public function parametersAction(){
+        // Namespace: /logger/clear $log
 
-    //     // Namespace: /configurator/parameters $file
+        // Debug information
+        $this->Logger->debug('Namespace: /logger/clear $log');
+        $this->Logger->debug('Extending: coreRouter');
 
-    //     // Debug information
-    //     $this->Logger->debug('Namespace: /configurator/parameters $file');
-    //     $this->Logger->debug('Extending: coreAPI');
+        // Check for required parameter
+        $log = isset($_GET['log']) ? $_GET['log'] : null;
 
-    //     // Check for required parameter
-    //     $file = $this->getParams('REQUEST', 'file');
+        // Debug information
+        $this->Logger->debug('$log: ' . json_encode($log, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 
-    //     // Debug information
-    //     $this->Logger->debug('$file: ' . json_encode($file, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+        // Validate parameter
+        if(empty($log)){
 
-    //     // Validate parameter
-    //     if(empty($file)){
+            // Log error and debug information
+            $this->Logger->error('Missing required parameter');
 
-    //         // Log error and debug information
-    //         $this->Logger->error('Missing required parameter');
+            // Return
+            return ['error' => 'Missing required parameter'];
+        }
 
-    //         // Send the output
-    //         $this->output(
-    //             ['error' => 'Missing required parameter'],
-    //             array('Content-Type: application/json', 'HTTP/1.1 500 Internal Server Error')
-    //         );
+        // Validate CSRF token
+        if(!$this->CSRF->validate()){
 
-    //         return;
-    //     }
+            // Log error and debug information
+            $this->Logger->error('Invalid CSRF token');
+            $this->Logger->debug('$token: ' . json_encode($this->CSRF->token(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 
-    //     // Get list of configuration's parameters
-    //     $parameters = $this->Form->get($file);
+            // Return
+            return ['error' => 'Invalid CSRF token'];
+        }
 
-    //     // Send the output
-    //     $this->output(
-    //         $parameters,
-    //         array('Content-Type: application/json', 'HTTP/1.1 200 OK')
-    //     );
-    // }
+        // Clear a log
+        if($this->Logger->clear($log)){
 
-    // /**
-    //  * Get a list of configuration's parameters using coreRouter
-    //  *
-    //  * @return void
-    //  */
-    // public function parametersRouterAction(){
+            // Return
+            return 'Log ' . $log . ' cleared';
+        } else {
 
-    //     // Namespace: /configurator/parameters $file
+            // Log error and debug information
+            $this->Logger->error('Unable to clear log ' . $log);
 
-    //     // Debug information
-    //     $this->Logger->debug('Namespace: /configurator/parameters $file');
-    //     $this->Logger->debug('Extending: coreRouter');
-
-    //     // Check for required parameter
-    //     $file = isset($_GET['file']) ? $_GET['file'] : null;
-
-    //     // Debug information
-    //     $this->Logger->debug('$file: ' . json_encode($file, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-
-    //     // Validate parameter
-    //     if(empty($file)){
-
-    //         // Log error and debug information
-    //         $this->Logger->error('Missing required parameter');
-
-    //         // Return
-    //         return ['error' => 'Missing required parameter'];
-    //     }
-
-    //     // Get list of configuration's parameters
-    //     $parameters = $this->Form->get($file);
-
-    //     // Return
-    //     return $parameters;
-    // }
+            // Return
+            return ['error' => 'Unable to clear log ' . $log];
+        }
+    }
 }

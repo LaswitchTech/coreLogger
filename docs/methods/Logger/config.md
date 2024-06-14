@@ -1,5 +1,5 @@
 # config([string $option, string $value])
-This methhod is used to configure the logger. It takes two parameters, the option to configure and the value to set it to.
+This method is used to configure the logger. It takes two parameters, the option to configure and the value to set it to.
 
 ```php
 $Logger->config('level', 5);

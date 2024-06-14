@@ -28,91 +28,101 @@ class Command extends BaseCommand {
 		parent::__construct($Auth);
 	}
 
-    // /**
-    //  * Set a configuration
-    //  */
-    // public function setAction($argv){
+    /**
+     * Retrieve the list of available logs
+     */
+    public function listAction($argv){
 
-    //     // Namespace: /configurator/set $file $configuration $value
+        // Namespace: /logger/list
 
-    //     // Retrieve parameters
-    //     $file = $argv[0] ?? null;
-    //     $configuration = $argv[1] ?? null;
-    //     $value = $argv[2] ?? null;
+        // Retrieve the list of logs
+        $logs = $this->Logger->list();
 
-    //     // Check for required parameters
-    //     if(count($argv) < 3 || empty($file) || empty($configuration) || empty($value)){
+        // Check if logs are available
+        if($logs){
 
-    //         // Log error and debug information
-    //         $this->Logger->error('Missing required parameters');
-    //         $this->Logger->debug('$file: ' . json_encode($file, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-    //         $this->Logger->debug('$configuration: ' . json_encode($configuration, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-    //         $this->Logger->debug('$value: ' . json_encode($value, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+            // Return the list of logs
+            $this->info(json_encode($logs, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+        } else {
 
-    //         // Send the output
-    //         $this->error('Missing required parameters');
+            // Return error
+            $this->error('Unable to retrieve the list of logs');
+        }
+    }
 
-    //         return;
-    //     }
+    /**
+     * Read a log
+     */
+    public function readAction($argv){
 
-    //     // Set a configuration
-    //     if($this->Configurator->set($file, $configuration, $value)){
+        // Namespace: /logger/read $log
 
-    //         // Return success
-    //         $this->success('Configuration ' . $file . '/' . $configuration . ' set to ' . $value);
-    //     } else {
+        // Retrieve parameters
+        $log = $argv[0] ?? null;
 
-    //         // Return error
-    //         $this->error('Unable to set configuration ' . $file . '/' . $configuration . ' to ' . $value);
-    //     }
-    // }
+        // Check for required parameters
+        if(count($argv) < 1 || empty($log)){
 
-    // /**
-    //  * Get a configuration
-    //  */
-    // public function getAction($argv){
+            // Log error and debug information
+            $this->Logger->error('Missing required parameters');
+            $this->Logger->debug('$log: ' . json_encode($log, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 
-    //     // Namespace: /configurator/get $file $configuration
+            // Send the output
+            $this->error('Missing required parameters');
 
-    //     // Retrieve parameters
-    //     $file = $argv[0] ?? null;
-    //     $configuration = $argv[1] ?? null;
+            return;
+        }
 
-    //     // Check for required parameters
-    //     if(count($argv) < 2 || empty($file) || empty($configuration)){
+        // Read a log
+        $content = $this->Logger->read($log);
 
-    //         // Log error and debug information
-    //         $this->Logger->error('Missing required parameters');
-    //         $this->Logger->debug('$file: ' . json_encode($file, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-    //         $this->Logger->debug('$configuration: ' . json_encode($configuration, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-    //         $this->Logger->debug('$value: ' . json_encode($value, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+        // Return the content
+        if($content){
 
-    //         // Send the output
-    //         $this->error('Missing required parameters');
+            // Return the content
+            $this->info($content);
+        } else {
 
-    //         return;
-    //     }
+            // Return error
+            $this->error('Unable to read log ' . $log);
+        }
+    }
 
-    //     // Get a configuration
-    //     $value = $this->Configurator->get($file, $configuration);
+    /**
+     * Clear a log
+     */
+    public function clearAction($argv){
 
-    //     // Return the value
-    //     if($value){
+        // Namespace: /logger/clear $log
 
-    //         // Check if the value is an array
-    //         if(is_array($value)){
+        // Retrieve parameters
+        $log = $argv[0] ?? null;
 
-    //             // Return the value in JSON format
-    //             $this->info(json_encode($value, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-    //         } else {
+        // Check for required parameters
+        if(count($argv) < 1 || empty($log)){
 
-    //             // Return the value
-    //             $this->info($value);
-    //         }
-    //     } else {
+            // Log error and debug information
+            $this->Logger->error('Missing required parameters');
+            $this->Logger->debug('$log: ' . json_encode($log, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 
-    //         // Return error
-    //         $this->error('Unable to retrieve configuration ' . $file . '/' . $configuration);
-    //     }
-    // }
+            // Send the output
+            $this->error('Missing required parameters');
+
+            return;
+        }
+
+        // Clear a log
+        $result = $this->Logger->clear($log);
+
+        // Return the result
+        if($result){
+
+            // Return the result
+            $this->info('Log ' . $log . ' has been cleared');
+        } else {
+
+            // Return error
+            $this->error('Unable to clear log ' . $log);
+        }
+    }
 }
