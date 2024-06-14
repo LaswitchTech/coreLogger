@@ -1,5 +1,5 @@
 # list()
-This methhod is used to list all the log files in the logger.
+This method is used to list all the log files in the logger.
 
 ```php
 $Logger->list();
