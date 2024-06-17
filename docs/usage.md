@@ -16,7 +16,7 @@ $Logger = new Logger();
 ```
 
 ## Methods
-`coreLogger` provides the following methods to manage configuration files:
+`coreLogger` provides the following methods:
 
 - [add()](methods/Logger/add.md)
 - [clear()](methods/Logger/clear.md)
@@ -48,7 +48,7 @@ class LoggerCommand extends Command {}
 ```
 
 ### Methods
-`Command` provides the following methods to manage configuration files:
+`Command` provides the following methods:
 
 - [clearAction()](methods/Command/clearAction.md)
 - [listAction()](methods/Command/listAction.md)
@@ -68,7 +68,7 @@ class LoggerController extends Controller {}
 ```
 
 ### Methods
-`Controller` provides the following methods to manage configuration files:
+`Controller` provides the following methods:
 
 - [clearAction()](methods/Controller/clearAction.md)
 - [clearRouterAction()](methods/Controller/clearRouterAction.md)

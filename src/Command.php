@@ -4,15 +4,9 @@
 namespace LaswitchTech\coreLogger;
 
 // Import additionnal class into the global namespace
-use LaswitchTech\coreLogger\Logger;
 use LaswitchTech\coreBase\BaseCommand;
 
 class Command extends BaseCommand {
-
-    /**
-     * Properties
-     */
-    protected $Logger = null;
 
     /**
      * Constructor
