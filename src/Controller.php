@@ -4,16 +4,14 @@
 namespace LaswitchTech\coreLogger;
 
 // Import additionnal class into the global namespace
-use LaswitchTech\coreLogger\Logger;
 use LaswitchTech\coreBase\BaseController;
-use LaswitchTech\coreCSRF\CSRF;
 
 class Controller extends BaseController {
 
-    // Properties
-    protected $Logger = null;
-    protected $CSRF = null;
-
+    /**
+     * Constructor
+     * @param object $Auth
+     */
 	public function __construct($Auth){
 
         // Namespace: /logger
@@ -24,12 +22,6 @@ class Controller extends BaseController {
 		// Set the controller Authorization Policy
 		$this->Permission = false; // Set to true to require a permission for the namespace used.
 		$this->Level = 1; // Set the permission level required
-
-        // Initialize Logger
-        $this->Logger = new Logger();
-
-        // Initialize CSRF
-        $this->CSRF = new CSRF();
 
 		// Call the parent constructor
 		parent::__construct($Auth);
