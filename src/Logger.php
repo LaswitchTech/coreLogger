@@ -176,6 +176,23 @@ class Logger {
 	}
 
     /**
+     * Retrieve the client User Agent.
+     *
+     * @return string $userAgent
+     */
+    public function agent(){
+
+        // Retrieve User Agent
+        $userAgent = 'Unknown';
+        if(isset($_SERVER['HTTP_USER_AGENT'])){
+            $userAgent = json_encode($_SERVER['HTTP_USER_AGENT']);
+        }
+
+        // Return
+        return $userAgent;
+    }
+
+    /**
      * Add a new log file.
      *
      * @param  string  $Name
